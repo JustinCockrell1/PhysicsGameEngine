@@ -43,6 +43,21 @@ namespace cyclone {
                 }
             }
         
+        void operator*=(const real value)
+        {
+            x*=value;
+            y*=value;
+            z*=value;
+        }
+
+        Vector3 operator*(const real value) const
+        {
+            return Vector3(x*value, y*value, z*value);
+        }
+
+
 
     }
 }
+
+
