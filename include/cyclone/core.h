@@ -29,7 +29,7 @@ namespace cyclone {
   
             real magnitude() const
             {
-                return real_sqrt(x*x,y*y, z*z);
+                return sqrt(x*x+y*y+ z*z);
             }
 
             real squareMagnitude() const{
@@ -92,6 +92,7 @@ namespace cyclone {
             z+=vector.z*scale;
         }
         
+        //Component Product
 
         Vector3 componentProduct(const Vector3 &vector) const
         {
@@ -105,9 +106,32 @@ namespace cyclone {
             z*=vector.z;
         }
 
-        
+        real scalarProduct(const Vector3 &vector) {
+            return x*vector.x +y*vector.y +z*vector.z;
+        }
+
+        real operator *(const Vector3 &vector) const
+        {
+            return x*vector.x + y*vector.y + z*vector.z;
+        }
+
+        Vector3 vectorProduct(const Vector3 &vector) const
+        {
+            return Vector3(y*vector.z-z*vector.y, z*vector.x-x*vector.z, x*vector.y-y*vector.x);
+        }
+
+        void operator %=(const Vector3 &vector)
+        {
+            *this = vectorProduct(vector);
+        }
+
+        Vector3 operator%(const Vector3 &vector) const
+        {
+            return Vector3(y*vector.z-z*vector.y, z*vector.x-x*vector.z, x*vector.y-y*vector.x);
+        }
     };
 }
+
 
 
 
